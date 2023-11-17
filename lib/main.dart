@@ -42,6 +42,17 @@ class DashBoardScreen extends StatelessWidget {
   IconData getAvatarIcon(String gender) {
     return gender == 'Male' ? Icons.face : Icons.pregnant_woman;
   }
+  // Function to generate a random calls
+  String getRandomCalls(){
+    Random random = Random();
+    return random.nextBool() ? 'Receive' : 'Sent';
+  }
+
+  IconData getAvatarCallsIcon(String calls) {
+    return calls == 'Receive' ? Icons.call_received : Icons.call_made;
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +85,8 @@ class DashBoardScreen extends StatelessWidget {
           int timeDifference = random.nextInt(51) + 10;
           // Get a random gender (Male/Female)
           String gender = getRandomGender();
+          // Get a random call (recevied /sent)
+          String calls = getRandomCalls();
           return InkWell(
             onTap: () {
               // Navigate to the details page when a name is tapped
@@ -114,9 +127,8 @@ class DashBoardScreen extends StatelessWidget {
                   children: <Widget>[
                     // Incoming/Outgoing icon based on your condition
                     Icon(
-                      Icons
-                          .call_received, // Replace with your icon for incoming/outgoing
-                      color: Colors.green, // Customize the color
+                      getAvatarCallsIcon(calls), // Replace with your icon for incoming/outgoing
+                      color: calls == 'Receive' ? Colors.red : Colors.green, // Customize the color
                     ),
                     SizedBox(width: 5), // Add some spacing
 
